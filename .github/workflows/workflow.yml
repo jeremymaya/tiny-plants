@@ -19,6 +19,5 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        cd ./ASPNetCoreLabs/HerokuContainer
         heroku container:push web -a ${{ secrets.HEROKU_APP_NAME }}
         heroku container:release web -a ${{ secrets.HEROKU_APP_NAME }}

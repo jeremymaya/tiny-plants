@@ -6,4 +6,7 @@
     <UserSecretsId>e9b181c1-abac-4c37-be92-bb042d67e638</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>

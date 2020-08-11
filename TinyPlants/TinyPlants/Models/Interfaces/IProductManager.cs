@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace TinyPlants.Models.Interfaces
 {
     public interface IProductManager
     {
-        Task<Product> GetProducts();
+        List<Cereal> GetCereals();
     }
 }

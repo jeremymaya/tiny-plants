@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  tinyplants:
+    image: ${DOCKER_REGISTRY-}tinyplants
+    build:
+      context: .
+      dockerfile: TinyPlants/Dockerfile

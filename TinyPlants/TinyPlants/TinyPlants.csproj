@@ -8,5 +8,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+    <Folder Include="Models\Interfaces\" />
+    <Folder Include="Models\Services\" />
+    <Folder Include="Views\Products\" />
   </ItemGroup>
 </Project>

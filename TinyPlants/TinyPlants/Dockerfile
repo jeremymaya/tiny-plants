@@ -8,9 +8,15 @@ ENV ASPNETCORE_URLS=http://*:5000
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
+# The below is commented and the line after is used when in heroku
+# COPY TinyPlants/TinyPlants.csproj TinyPlants/
 COPY ["TinyPlants.csproj", "./"]
+# The below is commented and the line after is used when in heroku
+# RUN dotnet restore "TinyPlants/TinyPlants.csproj"
 RUN dotnet restore "./TinyPlants.csproj"
 COPY . .
+# The below is commented and the line after is used when in heroku
+# WORKDIR "/src/TinyPlants"
 WORKDIR "/src/."
 RUN dotnet build "TinyPlants.csproj" -c Release -o /app/build
 

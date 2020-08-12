@@ -1,10 +1,17 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TinyPlants.Models
 {
-    public abstract class Product
+    public class Product
     {
-        public abstract int Id { get; set; }
-        public abstract string Name { get; set; }
-        public abstract decimal Rating { get; set; }
+        public int ID { get; set; }
+        public string Sku { get; set; }
+        public string Name { get; set; }
+        [Column(TypeName = "money")]
+        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public string Image { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }

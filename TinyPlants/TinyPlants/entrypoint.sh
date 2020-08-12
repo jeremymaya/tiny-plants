@@ -3,7 +3,9 @@
 set -e
 run_cmd="ASPNETCORE_URLS=http://*:$PORT dotnet TinyPlants.dll"
 
-until dotnet-ef database update; do
+dotnet tool install dotnet-ef
+
+until dotnet ef database update; do
 >&2 echo "StoreDbContext updated"
 sleep 1
 done

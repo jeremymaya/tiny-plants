@@ -32,5 +32,5 @@ COPY --from=publish /app/publish .
 # The below is commented and the line after is used when in heroku
 # ENTRYPOINT ["dotnet", "TinyPlants.dll"]
 # CMD ASPNETCORE_URLS=http://*:$PORT dotnet TinyPlants.dll
-RUN chmod +x entrypoint.sh
-CMD /bin/bash entrypoint.sh
+RUN chmod +x /src/entrypoint.sh
+CMD /bin/bash /src/entrypoint.sh

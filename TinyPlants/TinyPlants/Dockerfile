@@ -25,11 +25,12 @@ FROM build AS publish
 RUN dotnet publish "TinyPlants.csproj" -c Release -o /app/publish
 
 FROM base AS final
+WORKDIR /src
+COPY ["entrypoint.sh", "/app"]
 WORKDIR /app
 COPY --from=publish /app/publish .
 # The below is commented and the line after is used when in heroku
 # ENTRYPOINT ["dotnet", "TinyPlants.dll"]
 # CMD ASPNETCORE_URLS=http://*:$PORT dotnet TinyPlants.dll
-COPY src/entrypoint.sh /app/publish
 RUN chmod +x entrypoint.sh
 CMD /bin/bash entrypoint.sh

@@ -11,3 +11,10 @@ services:
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    depends_on:
+      - sql
+  sql:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: "Kim12341234!"

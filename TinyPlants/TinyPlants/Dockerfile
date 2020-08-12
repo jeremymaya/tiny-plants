@@ -28,7 +28,7 @@ RUN dotnet publish "TinyPlants.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /src
-COPY ["entrypoint.sh", "/app"]
+COPY ["entrypoint.sh", "/app/publish"]
 WORKDIR /app
 COPY --from=publish /app/publish .
 # The below is commented and the line after is used when in heroku

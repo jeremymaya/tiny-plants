@@ -5,6 +5,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_ConnectionStrings__DefaultConnection=Server=db,1433;Database=StoreDbContext;User Id=sa;Password=Kim12341234!
     ports:
       - "80"
       - "443"
@@ -12,9 +13,11 @@ services:
       - ~/.aspnet/https:/root/.aspnet/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     depends_on:
-      - sql
-  sql:
+      - db
+  db:
     image: "mcr.microsoft.com/mssql/server"
     environment:
         ACCEPT_EULA: "Y"
         SA_PASSWORD: "Kim12341234!"
+    ports:
+      - 1433:1433

@@ -24,5 +24,7 @@ namespace TinyPlants.Data
                     IsFeatured = true
                 });
         }
+
+        public DbSet<Product> Products { get; set; }
     }
 }

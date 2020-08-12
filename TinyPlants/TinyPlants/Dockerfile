@@ -29,8 +29,9 @@ RUN dotnet publish "TinyPlants.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY src/entrypoint.sh /app
+RUN chmod +x entrypoint.sh
+CMD /bin/bash entrypoint.sh
 # The below is commented and the line after is used when in heroku
 # ENTRYPOINT ["dotnet", "TinyPlants.dll"]
 # CMD ASPNETCORE_URLS=http://*:$PORT dotnet TinyPlants.dll
-RUN chmod +x /src/entrypoint.sh
-CMD /bin/bash /src/entrypoint.sh

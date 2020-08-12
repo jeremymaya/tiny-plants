@@ -2,6 +2,8 @@
 #Source: https://adevtalks.com/programming/deployment/deploy-net-core-3-1-web-api-to-heroku/
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS base
+ENV PATH $PATH:/root/.dotnet/tools
+RUN dotnet tool install -g dotnet-ef
 WORKDIR /app
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://*:5000

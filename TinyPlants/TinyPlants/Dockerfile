@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://*:5000
-ENV ConnectionStrings:DefaultConnection="Server=sql;Database=StoreDbContext;User=sa;Password=Kim12341234!"
+# ENV ConnectionStrings:DefaultConnection="Server=db;Database=StoreDbContext;User=sa;Password=Kim12341234!"
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
@@ -23,12 +23,14 @@ RUN dotnet build "TinyPlants.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "TinyPlants.csproj" -c Release -o /app/publish
-RUN chmod +x entrypoint.sh
-CMD /bin/bash entrypoint.sh
+# RUN chmod +x entrypoint.sh
+# CMD /bin/bash entrypoint.sh
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 # The below is commented and the line after is used when in heroku
 # ENTRYPOINT ["dotnet", "TinyPlants.dll"]
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet TinyPlants.dll
+# CMD ASPNETCORE_URLS=http://*:$PORT dotnet TinyPlants.dll
+RUN chmod +x entrypoint.sh
+CMD /bin/bash entrypoint.sh

@@ -1,15 +1,15 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 #Source: https://adevtalks.com/programming/deployment/deploy-net-core-3-1-web-api-to-heroku/
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS base
-ENV PATH $PATH:/root/.dotnet/tools
-RUN dotnet tool install -g dotnet-ef
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://*:5000
 # ENV ConnectionStrings:DefaultConnection="Server=db;Database=StoreDbContext;User=sa;Password=Kim12341234!"
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+ENV PATH $PATH:/root/.dotnet/tools
+RUN dotnet tool install -g dotnet-ef
 WORKDIR /src
 # The below is commented and the line after is used when in heroku
 # COPY TinyPlants/TinyPlants.csproj TinyPlants/
@@ -22,7 +22,7 @@ COPY . .
 # WORKDIR "/src/TinyPlants"
 WORKDIR "/src/."
 RUN dotnet build "TinyPlants.csproj" -c Release -o /app/build
-RUN dotnet-ef dotnet-ef database update
+RUN dotnet-ef database update
 
 FROM build AS publish
 RUN dotnet publish "TinyPlants.csproj" -c Release -o /app/publish
